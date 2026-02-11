@@ -27,7 +27,7 @@ export class ProductController {
     async createProduct(req, res, next) {
             try {
                 await this.productService.createProduct(req.body, req.user.id);
-                return res.status(201).json(`Produto criado com sucesso!`);
+                return res.status(201).json({message: `Produto criado com sucesso!`});
                 
             } catch (error) {
                 next(error);

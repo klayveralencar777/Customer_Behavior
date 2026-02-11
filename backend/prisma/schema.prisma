@@ -56,7 +56,7 @@ model ProductMovement {
 model Customer {
   id        String   @id @default(uuid())
   name      String
-  email     String       @unique
+  email     String       
   phone     String   @db.VarChar(20)
 
   userId    String
@@ -68,6 +68,7 @@ model Customer {
 
   @@index([userId])
   @@unique([id, userId])
+  @@unique([email, userId])
 }
 
 model Transaction {

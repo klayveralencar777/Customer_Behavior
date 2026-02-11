@@ -26,7 +26,7 @@ export class UserController {
     async createUser(req, res, next) {
         try {
             await this.userService.createUser(req.body);
-            return res.status(201).json(`Conta criada com sucesso!`);
+            return res.status(201).json({message: `Conta criada com sucesso!`});
             
         } catch (error) {
             next(error);
