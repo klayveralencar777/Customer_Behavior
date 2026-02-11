@@ -7,14 +7,24 @@ export class AuthService {
     constructor() { this.userService = new UserService(); }
 
     async login({ email, password }) {
-        if (!email || !password) throw new UnauthorizedError(`Credenciais inválidas, tente novamente!`);
+        if (!email || !password) {
+            throw new UnauthorizedError(`Credenciais inválidas, tente novamente!`); 
+        }
         const user = await this.userService.findUserByEmail(email);
         const checkPassword = await bcrypt.compare(password, user.password);
-        if (!checkPassword) throw new UnauthorizedError(`Credenciais incorretas, tente novamente!`);
+        
+        if (!checkPassword) {
+            throw new UnauthorizedError(`Credenciais incorretas, tente novamente!`);
+        }
 
         const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: '1h' });
-        return token;
-        
+        const userData = { 
+            name :user.name,
+            email: user.email, 
+            token,
 
+         }
+        return userData;
+        
     }
 }
