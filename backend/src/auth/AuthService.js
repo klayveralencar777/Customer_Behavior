@@ -22,9 +22,12 @@ export class AuthService {
             name :user.name,
             email: user.email, 
             token,
+            userId : user.id,
 
          }
         return userData;
         
     }
+
+    
 }

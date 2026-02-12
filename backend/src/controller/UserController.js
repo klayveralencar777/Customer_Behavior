@@ -23,6 +23,16 @@ export class UserController {
             
         }
     }
+    async findUserById(req, res, next) {
+        try {
+            const user = await this.userService.findUserById(req.params.id);
+            return res.status(200).json(user);
+            
+        } catch (error) {
+            next(error);
+            
+        }
+    }
     async createUser(req, res, next) {
         try {
             await this.userService.createUser(req.body);

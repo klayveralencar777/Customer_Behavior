@@ -15,8 +15,7 @@ export class AuthController {
         } catch (error) {
             next(error);
             
-        }
-        
+        }  
         
     }
 

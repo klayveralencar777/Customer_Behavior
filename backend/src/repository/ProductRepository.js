@@ -10,10 +10,8 @@ export class ProductRepository {
     }
 
     async findById(id, userId) {
-        return await prisma.product.findUnique({
-            where: {
-                id_userId: { id, userId }
-            }
+        return await prisma.product.findFirst({
+            where: { id, userId }
         });
     }
 
@@ -28,20 +26,15 @@ export class ProductRepository {
 
     async update(id, userId, data) {
         return await prisma.product.update({
-             where: {
-                id_userId : {id, userId}
-                
-             },
+             where: { id, userId },
              data
         });
     }
 
     async delete(id, userId) {
         return await prisma.product.delete({
-            where: {
-                id_userId: { id, userId}
-            }
-        })
+            where: { id, userId }
+        });
     }
 
    

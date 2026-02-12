@@ -1,0 +1,18 @@
+export class ProductMovementRepository {
+    constructor(db) {
+        this.db = db;
+    }
+
+    async createMany(data) {
+        return await this.db.productMovement.createMany({ data });
+    }
+
+
+    async findByProduct(productId, userId) {
+        return await this.db.productMovement.findFirst({
+             where: { productId, userId},
+             orderBy: { createdAt: "desc"}
+        });
+
+    }
+}

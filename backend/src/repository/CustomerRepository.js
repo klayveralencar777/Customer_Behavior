@@ -10,19 +10,16 @@ export class CustomerRepository {
     }
 
     async findById(id, userId) {
-        return await prisma.customer.findUnique({
-             where: {
-                  id_userId: { id, userId }        
-             }
+        return await prisma.customer.findFirst({
+            where: { id, userId}
         });
+          
     }
 
     async findByEmail(email, userId) {
-        return await prisma.customer.findUnique({
-             where: {
-                 email_userId: { email, userId}
-             }
-        });
+       return await prisma.customer.findFirst({
+            where: { email, userId }
+       });
     }
 
 
@@ -39,23 +36,20 @@ export class CustomerRepository {
     async update(id, userId, data) {
         return await prisma.customer.update({
              where: {
-                    id_userId: { id, userId }
+                id, userId
+                    
              },
-             data
+              data
         })
     }
 
     async delete(id, userId) {
         return await prisma.customer.delete({
             where: {
-                id_userId: { id, userId }
+                id, userId
             }
         })
     }
-
-
-
-    
 
 
 }

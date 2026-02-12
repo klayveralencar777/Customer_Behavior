@@ -8,6 +8,13 @@ export class UserService {
     async findUser() {
         return await this.userRepository.find();
     }
+
+
+    async findUserById(id) {
+        const user = await this.userRepository.findById(id);
+        if(!user) throw new EntityNotFound(`Usuário não encontrado com o id ${id}`);
+        return user;
+    }
     
     async findUserByEmail(email) {
         const user = await this.userRepository.findByEmail(email);
@@ -25,10 +32,12 @@ export class UserService {
             email,
             password: cryptPassword,
         });
-        const{password_, ...userNoPassword} = user;
+        const{password: _, ...userNoPassword} = user;
         return userNoPassword;
 
         
     }
+
+    
 }
 

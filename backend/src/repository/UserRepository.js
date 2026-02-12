@@ -6,6 +6,10 @@ export class UserRepository {
         return await prisma.user.findMany();
     }
 
+    async findById(id) {
+        return await prisma.user.findUnique({ where: { id }});
+    }
+
 
     async findByEmail(email) {
         return await prisma.user.findUnique({ where: { email }});
