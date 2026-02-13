@@ -3,12 +3,14 @@ import { TransactionRepository } from "../repository/TransactionRepository.js";
 import {  CustomerService } from '../service/CustomerService.js'
 import { prisma } from "../database/prisma.js";
 import { BusinessRuleError, EntityNotFound } from "../exceptions/Exceptions.js";
+import { ProductService } from "./ProductService.js";
 
 export class TransactionService {
     constructor() {
         this.transactionRepository = new TransactionRepository(prisma);
         this.movementRepository = new ProductMovementRepository(prisma);
         this.customerService = new CustomerService();
+        this.productService = new ProductService();
     }
 
     async findTransactions(userId) {
@@ -24,18 +26,21 @@ export class TransactionService {
     }
 
     async createTransaction({ userId, customerId, type, items}) {
+         this.checkTypeTransaction(type, customerId);
 
-        if(!items || items.length === 0) throw new BusinessRuleError(`É necessário informar pelo menos um item`);
-
-        if(type === "VENDA" &&  !customerId) throw new BusinessRuleError(`Para venda é necessário o cliente`);
+        if(!items || items.length === 0) {
+            throw new BusinessRuleError(`É necessário informar pelo menos um item.`);
+        } 
         
         return prisma.$transaction(async (tx) => {
             
             const transactionRepository = new TransactionRepository(tx);
             const movementRepository = new ProductMovementRepository(tx);
 
-            if(type === "VENDA" ) await this.customerService.findCustomerById(customerId, userId);
-                
+            if(type === "VENDA" ) {
+                await this.customerService.findCustomerById(customerId, userId);
+            } 
+   
             const movementType = type === "VENDA" ? "SAIDA" : "ENTRADA";
 
             const totalAmount = items.reduce((sum, item) =>
@@ -66,5 +71,17 @@ export class TransactionService {
         });
     }
 
+    checkTypeTransaction(type, customerId) {
 
+        if(type === "VENDA" &&  !customerId) {
+            throw new BusinessRuleError(`Para venda é necessário o cliente.`);
+        }
+
+        if(type === "COMPRA" && customerId) {
+            throw new BusinessRuleError(`Compras não devem possuir clientes.`);
+
+        } 
+    }
+
+   
 }
