@@ -14,7 +14,19 @@ export class TransactionController {
             
         }
     }
+
+    async findTransactionById(req, res, next) {
+        try {
+            const transaction = await this.transactionService.findTransactionById(req.params.id, req.user.id);
+            return res.status(200).json(transaction);
+            
+        } catch (error) {
+            next(error);
+        }
+
+    }
     
+
     async createTransaction(req, res) {
         const{ customerId, type, items} = req.body
         const  userId  = req.user.id
@@ -33,4 +45,6 @@ export class TransactionController {
             
         }
     }
+
+    
 }

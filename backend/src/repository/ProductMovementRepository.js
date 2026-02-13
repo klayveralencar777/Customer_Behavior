@@ -15,4 +15,11 @@ export class ProductMovementRepository {
         });
 
     }
+
+    async findAllMovements(userId) {
+        return await this.db.productMovement.findMany({
+                where: { userId }
+        });
+        
+    }
 }

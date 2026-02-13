@@ -1,6 +1,7 @@
 import { ProductMovementRepository } from "../repository/ProductMovementRepository.js";
 import { TransactionRepository } from "../repository/TransactionRepository.js";
 import { prisma } from "../database/prisma.js";
+import { EntityNotFound } from "../exceptions/Exceptions.js";
 
 export class TransactionService {
     constructor() {
@@ -12,6 +13,13 @@ export class TransactionService {
         return await this.transactionRepository.find(userId);
     }
 
+    async findTransactionById(id, userId) {
+        const transaction = await this.transactionRepository.findById(id, userId);
+        if(!transaction) {
+            throw new EntityNotFound(`Transação com o id ${id} não encontrada!`);
+        }
+        return transaction;
+    }
 
     async createTransaction({ userId, customerId, type, items}) {
         return prisma.$transaction(async (tx) => {
@@ -46,5 +54,7 @@ export class TransactionService {
 
         });
     }
+
+   
 
 }
