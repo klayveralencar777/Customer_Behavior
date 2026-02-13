@@ -27,7 +27,7 @@ export class TransactionController {
     }
     
 
-    async createTransaction(req, res) {
+    async createTransaction(req, res, next) {
         const{ customerId, type, items} = req.body
         const  userId  = req.user.id
 
@@ -41,7 +41,7 @@ export class TransactionController {
             return res.status(201).json({message: `Transação criada com sucesso!`, transaction});
             
         } catch (error) {
-            return res.status(400).json({error: error.message});
+            next(error);
             
         }
     }
