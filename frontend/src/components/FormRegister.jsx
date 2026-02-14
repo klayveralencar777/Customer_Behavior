@@ -65,7 +65,7 @@ export default function FormRegister({ onSubmit }) {
                     type="submit"
                     className="btn btn-primary rounded-3 fw-semibold py-2"
                 >
-                    Criar Conta
+                    Cadastrar
                 </button>
             </div>
 

@@ -20,7 +20,7 @@ export default function PageRegister() {
                 <div className="col-12 col-sm-8 col-md-6 col-lg-4">
                     <div className="card shadow-lg rounded-4">
                         <div className="card-body p-4">
-                            <h5 className="text-center mb-4">Registro</h5>
+                            <h5 className="text-center mb-4">Criar Conta</h5>
                             <FormRegister onSubmit={handleRegister}></FormRegister>
                         </div>
                     </div>
