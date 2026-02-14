@@ -4,7 +4,8 @@ import { MetricsRepository } from "../repository/MetricsRepository.js";
 export class MetricsService {
     constructor() { this.metricsRepository = new MetricsRepository(); }
 
-    async findMetrics(userId) {     
+    async findMetrics(userId) { 
+            
         const totalCustomers = await this.metricsRepository.countCustomers(userId);
         const totalTransactions = await this.metricsRepository.countTransactions(userId);
         const totalSale = await this.metricsRepository.findTotalSales(userId);
