@@ -17,4 +17,5 @@ export class ProductMovementService {
         return await this.productMovementRepo.findByProduct(productId, userId);  
     
     }
+    
 }
