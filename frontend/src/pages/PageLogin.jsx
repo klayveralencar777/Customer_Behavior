@@ -7,7 +7,7 @@ export default function PageLogin() {
                 <div className="col-12 col-sm-8 col-md-6 col-lg-4">
                     <div className="card shadow-lg rounded-4">
                         <div className="card-body p-4">
-                            <h5 className="text-center mb-4">Login</h5>
+                            <h5 className="text-center mb-4">Entrar</h5>
                                     <FormLogin></FormLogin>                 
                         </div>
                     </div>

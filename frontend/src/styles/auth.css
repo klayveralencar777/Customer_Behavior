@@ -1,0 +1,17 @@
+.auth-form {
+    font-family: "Inter", sans-serif;
+}
+
+.auth-form .form-label {
+    letter-spacing: 0.5px;
+}
+
+.auth-form .form-control {
+    padding: 0.75rem 0.9rem;
+    font-size: 0.95rem;
+}
+
+.auth-form .btn {
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
