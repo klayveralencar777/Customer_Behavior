@@ -1,9 +1,20 @@
 import { Link } from "react-router-dom";
 import "../styles/auth.css";
+import { useState } from "react";
 
-export default function FormLogin() {
+
+export default function FormLogin({ onSubmit }) {
+
+    const[email, setEmail] = useState("");
+    const[password, setPassword] = useState("");
+
+    function handleSubmit(e) {
+        e.preventDefault();
+        onSubmit({email, password});
+    }
+    
     return (
-        <form className="auth-form">
+        <form  onSubmit={ handleSubmit} className="auth-form">
 
             <div className="mb-4">
                 <label className="form-label fw-semibold small text-uppercase">
@@ -12,6 +23,8 @@ export default function FormLogin() {
                 <input
                     type="email"
                     className="form-control rounded-3"
+                    value={ email }
+                    onChange={(e) => setEmail(e.target.value)}
                     placeholder="Digite seu email"
                     required
                 />
@@ -24,6 +37,8 @@ export default function FormLogin() {
                 <input
                     type="password"
                     className="form-control rounded-3"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     placeholder="Digite sua senha"
                     required
                 />

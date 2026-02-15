@@ -1,5 +1,5 @@
 import FormRegister from "../components/FormRegister";
-import { registerUser } from "../services/AuthService";
+import { registerUser } from "../services/apiService";
 
 export default function PageRegister() {
     async function handleRegister(data) {

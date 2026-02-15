@@ -7,11 +7,10 @@ export default function FormRegister({ onSubmit }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
 
     function handleSubmit(e) {
         e.preventDefault();
-        onSubmit({ name, email, password, confirmPassword });
+        onSubmit({ name, email, password});
     }
 
     return (

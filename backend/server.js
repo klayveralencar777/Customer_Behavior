@@ -9,13 +9,13 @@ import MetricsRouter  from './src/routes/MetricsRoutes.js'
 import cors from 'cors'
 const app = express()
 const port = 3333
+app.use(cors({
+  origin: "http://localhost:5173",
+  credentials: true,
+
+}));
 app.use(express.json())
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  }),
-);
+
 app.use('/users', UserRouter);
 app.use('/auth', AuthRouter);
 app.use('/products', ProductRouter);
