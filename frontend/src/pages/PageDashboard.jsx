@@ -1,5 +1,7 @@
+import KPICards from "../components/KPICards";
+
 export default function PageDashboard() {
     return(
-        <h1>Dashboard</h1>
+        <KPICards></KPICards>
     );
 }
