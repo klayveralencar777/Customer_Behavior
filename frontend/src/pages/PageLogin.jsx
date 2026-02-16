@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import FormLogin from "../components/FormLogin";
-import { userLogin } from "../services/apiService";
+import { userLogin } from "../services/authService";
 
 export default function PageLogin() {
     const navigate = useNavigate();

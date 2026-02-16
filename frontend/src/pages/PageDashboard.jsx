@@ -8,15 +8,36 @@ import {
   FaChartLine,
 } from "react-icons/fa";
 import KPICards from "../components/KPICards";
+import { useEffect, useState } from "react";
+import { getMetrics } from "../services/metricsService";
+
 
 export default function Dashboard() {
+  
+  const[data, setData] = useState("");
+  
+  useEffect(()=> {
+      async function viewDashboard() {
+        try {
+            const metrics = await getMetrics();
+            setData(metrics);
+          
+        } catch (error) {
+          console.log(error);
+          
+        }
+      }
+
+      viewDashboard();
+  },[]);
+  
   return (
     <Container className="mt-4">
       <Row className="g-3">
         <Col md={4}>
           <KPICards
             title="Clientes"
-            value="1.245"
+            value= {data.totalCustomers}
             icon={<FaUsers />}
             variant="primary"
           />
@@ -25,7 +46,7 @@ export default function Dashboard() {
         <Col md={4}>
           <KPICards
             title="Lucro"
-            value="R$ 32.400"
+            value={`R$ ${data.profit}`}
             icon={<FaDollarSign />}
             variant="success"
           />
@@ -34,7 +55,7 @@ export default function Dashboard() {
         <Col md={4}>
           <KPICards
             title="Transações"
-            value="320"
+            value={data.totalTransactions}
             icon={<FaShoppingCart />}
             variant="warning"
           />
@@ -43,7 +64,7 @@ export default function Dashboard() {
         <Col md={4}>
           <KPICards
             title="Total de Compras"
-            value="R$ 18.750"
+            value={`R$ ${data.totalPurchase}`}
             icon={<FaShoppingBag />}
             variant="danger"
           />
@@ -51,8 +72,8 @@ export default function Dashboard() {
 
         <Col md={4}>
           <KPICards
-            title="Total de Vendas"s
-            value="R$ 51.150"
+            title="Total de Vendas"
+            value={`R$ ${data.totalSale }`}
             icon={<FaChartLine />}
             variant="success"
           />
