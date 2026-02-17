@@ -1,5 +1,7 @@
+import FormCustomer from "../components/FormCustomer";
+
 export default function PageCustomer() {
     return(
-            <h1>Page Customer</h1>
+            <FormCustomer></FormCustomer>
     );
 }

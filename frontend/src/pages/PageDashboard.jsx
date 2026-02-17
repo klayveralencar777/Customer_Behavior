@@ -65,7 +65,7 @@ export default function Dashboard() {
           <KPICards
             title="Total de Compras"
             value={`R$ ${data.totalPurchase}`}
-            icon={<FaShoppingBag />}
+            icon={<FaShoppingBag />}  
             variant="danger"
           />
         </Col>
