@@ -9,7 +9,7 @@ export class ProductMovementRepository {
 
 
     async findByProduct(productId, userId) {
-        return await this.db.productMovement.findFirst({
+        return await this.db.productMovement.findMany({
              where: { productId, userId},
              orderBy: { createdAt: "desc"}
         });

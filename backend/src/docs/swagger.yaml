@@ -3,10 +3,12 @@ openapi: 3.0.0
 info:
   title: Inventory Transactions API
   version: 1.0.0
-  description: API para gerenciamento de produtos e transações
 
 servers:
   - url: http://localhost:3333
+
+security:
+  - bearerAuth: []
 
 components:
   securitySchemes:
@@ -41,3 +43,431 @@ paths:
           description: Login realizado com sucesso
         "401":
           description: Credenciais inválidas
+
+  /users:
+    post:
+      summary: Cria um novo usuário
+      tags:
+        - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - email
+                - password
+              properties:
+                name:
+                  type: string
+                  example: Klayver Alencar
+                email:
+                  type: string
+                  format: email
+                  example: klayver@email.com
+                password:
+                  type: string
+                  format: password
+                  example: 123456
+      responses:
+        "201":
+          description: Usuário criado com sucesso
+        "400":
+          description: Dados inválidos
+
+  /transactions:
+    post:
+      summary: Cria uma nova transação
+      tags:
+        - Transactions
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - customerId
+                - type
+                - items
+              properties:
+                customerId:
+                  type: string
+                  format: uuid
+                  example: 926fd1b2-e12d-4916-8800-27642ed7b16c
+                type:
+                  type: string
+                  enum:
+                    - VENDA
+                    - COMPRA
+                  example: VENDA
+                items:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required:
+                      - productId
+                      - quantity
+                      - unitPrice
+                    properties:
+                      productId:
+                        type: string
+                        format: uuid
+                        example: 144986c5-e1c1-4b0d-bac2-2dea7f9e8eef
+                      quantity:
+                        type: integer
+                        minimum: 1
+                        example: 2
+                      unitPrice:
+                        type: number
+                        format: float
+                        example: 300.23
+      responses:
+        "201":
+          description: Transação criada com sucesso
+        "400":
+          description: Dados inválidos
+        "404":
+          description: Cliente ou produto não encontrado
+
+    get:
+      summary: Lista todas as transações
+      tags:
+        - Transactions
+      responses:
+        "200":
+          description: Lista de transações retornada com sucesso
+        "500":
+          description: Erro interno do servidor
+
+  /transactions/{id}:
+    get:
+      summary: Busca uma transação por ID
+      tags:
+        - Transactions
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Transação encontrada com sucesso
+        "404":
+          description: Transação não encontrada
+        "400":
+          description: ID inválido
+
+
+
+  /metrics:
+    get:
+      summary: Retorna métricas gerais do sistema
+      tags:
+        - Metrics
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Métricas retornadas com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  totalCustomers:
+                    type: integer
+                    example: 2
+
+                  totalTransactions:
+                    type: integer
+                    example: 5
+
+                  totalSale:
+                    type: string
+                    example: "2903.76"
+
+                  totalPurchase:
+                    type: string
+                    example: "550"
+
+                  profit:
+                    type: number
+                    format: float
+                    example: 2353.76
+
+                  topProduct:
+                    type: object
+                    properties:
+                      productId:
+                        type: string
+                        format: uuid
+                        example: 144986c5-e1c1-4b0d-bac2-2dea7f9e8eef
+                      quantitySold:
+                        type: integer
+                        example: 8
+        "401":
+          description: Não autorizado
+        "500":
+          description: Erro interno do servidor
+
+  /products:
+    get:
+      summary: Lista todos os produtos
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de produtos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                      example: 331cccf2-5e3c-42c0-8dc0-f6a0c44bc089
+                    name:
+                      type: string
+                      example: Lente de contato
+                    description:
+                      type: string
+                      example: lentes azuis cristalinas
+                    userId:
+                      type: string
+                      format: uuid
+                      example: c73e828c-bacb-492e-b4e6-e5ed68fcbc72
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: 2026-02-12T17:55:54.068Z
+                    updatedAt:
+                      type: string
+                      format: date-time
+                      example: 2026-02-12T17:55:54.068Z
+
+    post:
+      summary: Cria um novo produto
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - description
+              properties:
+                name:
+                  type: string
+                  example: Lente de contato
+                description:
+                  type: string
+                  example: lentes azuis cristalinas
+      responses:
+        "201":
+          description: Produto criado com sucesso
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  userId:
+                    type: string
+                    format: uuid
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+        "400":
+          description: Dados inválidos
+
+  /products/{id}:
+    get:
+      summary: Busca produto por ID
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    format: uuid
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  userId:
+                    type: string
+                    format: uuid
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type: string
+                    format: date-time
+        "404":
+          description: Produto não encontrado
+
+    put:
+      summary: Atualiza produto por ID
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - name
+                - description
+              properties:
+                name:
+                  type: string
+                  example: Lente de contato premium
+                description:
+                  type: string
+                  example: lentes verdes premium
+      responses:
+        "200":
+          description: Produto atualizado com sucesso
+        "404":
+          description: Produto não encontrado
+
+    delete:
+      summary: Remove produto por ID
+      tags:
+        - Products
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Produto removido com sucesso
+        "404":
+          description: Produto não encontrado
+
+
+  /movements:
+    get:
+      summary: Lista todos os movimentos
+      tags:
+        - Movements
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de movimentos retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                      example: 4feef4e6-a1a8-4184-b08f-6325dd432271
+                    type:
+                      type: string
+                      enum:
+                        - ENTRADA
+                        - SAIDA
+                      example: SAIDA
+                    quantity:
+                      type: integer
+                      example: 2
+                    unitPrice:
+                      type: string
+                      example: "300.23"
+                    productId:
+                      type: string
+                      format: uuid
+                      example: 144986c5-e1c1-4b0d-bac2-2dea7f9e8eef
+                    transactionId:
+                      type: string
+                      format: uuid
+                      example: f3db94a5-3172-42c6-8315-2b4cd1ab710a
+                    userId:
+                      type: string
+                      format: uuid
+                      example: c73e828c-bacb-492e-b4e6-e5ed68fcbc72
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: 2026-02-14T18:36:42.629Z
+
+  /movements/{productId}:
+    get:
+      summary: Busca movimento por ID
+      tags:
+        - Movements
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: productId   
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Movimento encontrado com sucesso
+          
+        "404":
+          description: Movimento não encontrado

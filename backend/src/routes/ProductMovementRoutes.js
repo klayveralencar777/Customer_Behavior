@@ -5,7 +5,7 @@ const router = express.Router();
 const productMovController = new ProductMovementController();
 router.use(authMiddleware);
 router.get('', productMovController.findAllMovements.bind(productMovController));
-router.get('/:id', productMovController.findMovementByProduct.bind(productMovController));
+router.get('/:productId', productMovController.findMovementByProduct.bind(productMovController));
 
 
 

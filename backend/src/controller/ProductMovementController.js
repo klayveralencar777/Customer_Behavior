@@ -14,8 +14,11 @@ export class ProductMovementController {
     }
 
     async findMovementByProduct(req, res, next) {
+
+        const { productId } = req.params
+        
         try {
-            const movement = await this.productMovementService.findMovementByProduct(req.params.productId, req.user.id);
+            const movement = await this.productMovementService.findMovementByProduct(productId, req.user.id);
             return res.status(200).json(movement);
             
         } catch (error) {
