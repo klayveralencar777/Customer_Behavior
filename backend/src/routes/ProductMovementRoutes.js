@@ -4,8 +4,8 @@ import { authMiddleware } from '../middleware/AuthMiddleware.js';
 const router = express.Router();
 const productMovController = new ProductMovementController();
 router.use(authMiddleware);
-router.get('/find', productMovController.findAllMovements.bind(productMovController));
-router.get('/find/:id', productMovController.findMovementByProduct.bind(productMovController));
+router.get('', productMovController.findAllMovements.bind(productMovController));
+router.get('/:id', productMovController.findMovementByProduct.bind(productMovController));
 
 
 

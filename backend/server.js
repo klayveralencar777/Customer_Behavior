@@ -6,6 +6,7 @@ import CustomerRouter from './src/routes/CustomerRoutes.js'
 import TransactionRouter from './src/routes/TransactionRoutes.js'
 import MovementRouter from './src/routes/ProductMovementRoutes.js'
 import MetricsRouter  from './src/routes/MetricsRoutes.js'
+import { swaggerUi, swaggerDocument } from "./config/swagger.js";
 import cors from 'cors'
 const app = express()
 const port = 3333
@@ -16,6 +17,7 @@ app.use(cors({
 }));
 app.use(express.json())
 
+app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/users', UserRouter);
 app.use('/auth', AuthRouter);
 app.use('/products', ProductRouter);

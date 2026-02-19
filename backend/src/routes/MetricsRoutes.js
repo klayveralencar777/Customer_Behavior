@@ -5,7 +5,7 @@ import { authMiddleware } from '../middleware/AuthMiddleware.js';
 const router = express.Router();
 const metricsController  = new MetricsController();
 router.use(authMiddleware);
-router.get('/find', metricsController.findMetrics.bind(metricsController));
+router.get('', metricsController.findMetrics.bind(metricsController));
 
 
 

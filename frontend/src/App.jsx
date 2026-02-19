@@ -20,8 +20,6 @@ function App() {
                       <Route path="/customers" element={<PageCustomer></PageCustomer>} />
                       <Route path = "/products" element={<PageProducts></PageProducts>}/>
                       <Route path = "/transactions" element={<PageTransactions></PageTransactions>}/>
-
-                      
                   </Route>
             </Routes>
         </BrowserRouter>

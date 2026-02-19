@@ -6,9 +6,9 @@ import { createTransactionSchema } from '../validations/TransactionsSchema.js';
 const router = express.Router();
 const transactionController = new TransactionController();
 router.use(authMiddleware);
-router.get('/find', transactionController.findTransaction.bind(transactionController));
-router.get('/find/:id', transactionController.findTransactionById.bind(transactionController));
-router.post('/create', validate(createTransactionSchema) ,transactionController.createTransaction.bind(transactionController));
+router.get('', transactionController.findTransaction.bind(transactionController));
+router.get('/:id', transactionController.findTransactionById.bind(transactionController));
+router.post('', validate(createTransactionSchema) ,transactionController.createTransaction.bind(transactionController));
 
 
 
