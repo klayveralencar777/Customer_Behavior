@@ -3,13 +3,12 @@
 Sistema completo para controle de movimentação de produtos e transações comerciais, composto por:
 
 - 🖥 Backend API (Node.js + Prisma ORM)
-- 📱 Aplicativo Mobile (React Native) *(em desenvolvimento)*
 
 O projeto está sendo desenvolvido de forma incremental e documenta a evolução de um sistema comercial orientado a regras de negócio e métricas de desempenho.
 
 ---
 
-# 🚀 Objetivo
+#  Objetivo
 
 Construir um sistema comercial estruturado demonstrando:
 
@@ -17,12 +16,10 @@ Construir um sistema comercial estruturado demonstrando:
 - Separação clara de responsabilidades
 - Integridade transacional
 - Modelagem relacional consistente
-- Integração entre API e aplicação mobile
-- Evolução progressiva com implementação futura de KPIs
 
 ---
 
-# 🧠 Regras de Negócio
+#  Regras de Negócio
 
 - Cada transação pode conter múltiplos produtos.
 - Movimentações são registradas como:
@@ -36,7 +33,7 @@ Construir um sistema comercial estruturado demonstrando:
 
 # 🖥 Backend (API)
 
-## 🔧 Tecnologias
+##  Tecnologias
 
 - Node.js
 - Express
@@ -69,29 +66,29 @@ Essa abordagem garante:
 
 ---
 
-## ✅ Funcionalidades Já Implementadas
+##  Funcionalidades Já Implementadas
 
-### 📦 Produtos
+###  Produtos
 - CRUD completo de produtos
 
-### 👤 Clientes
+###  Clientes
 - CRUD completo de clientes
 
-### 💳 Transações
+###  Transações
 - Criação de transações com múltiplos produtos
 - Cálculo automático do valor total
 - Registro automático das movimentações de estoque
 - Uso de transações atômicas (`$transaction`)
 - Listagem de transações por usuário
 
-### 📊 Movimentação de Produtos
+### Movimentação de Produtos
 - Registro de entradas e saídas
 - Consulta de movimentações com vínculo ao produto
 - Associação das movimentações à transação correspondente
 
 ---
 
-## 🚧 Em Desenvolvimento (Backend)
+##  Em Desenvolvimento (Backend)
 
 - Padronização de respostas da API
 - Melhorias na camada de validação
@@ -100,59 +97,12 @@ Essa abordagem garante:
 - Melhor tratamento de erros
 
 ---
+### As principais rotas estão documentadas no Swagger UI.
 
-# 📱 Frontend Mobile (React Native)
+![Rotas documentadas I](backend/src/docs/swagger-parte1.png)
 
-Aplicação mobile que consumirá a API para gerenciamento das operações comerciais.
+![Rotas documentadas II](backend/src/docs/swagger%20parte%202.png)
 
-## 🎯 Funcionalidades Planejadas
 
-- Cadastro e listagem de produtos
-- Cadastro e listagem de clientes
-- Registro de transações
-- Visualização do histórico de movimentações
-- Dashboard com métricas comerciais
-
-## 🚧 Status
-
-- Estrutura inicial será criada
-- Integração com API em andamento
-- Interface e fluxo de navegação em planejamento
-
----
-
-# 📊 Próxima Evolução: KPIs e Métricas
-
-O sistema evoluirá para incluir indicadores de desempenho, como:
-
-- Faturamento total
-- Faturamento por período
-- Ticket médio
-- Produtos mais vendidos
-- Clientes com maior volume de compras
-- Volume de movimentação por período
-
-O objetivo é transformar o projeto em uma base simples de gestão comercial com análise de dados.
-
----
-
-# 🎯 Visão do Projeto
-
-Este projeto vai além de um CRUD básico.
-
-Está sendo construído como uma base para um sistema comercial com:
-
-- Controle transacional consistente
-- Regras de negócio bem definidas
-- Evolução incremental
-- Preparação para métricas e análise de desempenho
-
----
-
-# 📌 Status
-
-🟢 Em desenvolvimento ativo  
-📈 Evoluindo para incluir métricas e dashboard comercial  
-📱 Integração mobile em progresso  
-
----
+### EVOLUÇÃO   
+- Melhorias de arquitetura e tipagem estão sendo desenvolvidas. Pretendo migrar a API para TypeScript para verificar erros antes da execução, melhorando a confiabilidade da API e permitindo mais escalabilidade.
