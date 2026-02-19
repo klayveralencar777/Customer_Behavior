@@ -471,3 +471,96 @@ paths:
           
         "404":
           description: Movimento não encontrado
+
+  /customers:
+    get:
+      summary: Lista todos os clientes
+      tags:
+        - Customers
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Lista de clientes retornada com sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      format: uuid
+                      example: 331cccf2-5e3c-42c0-8dc0-f6a0c44bc089
+                    name:
+                      type: string
+                      example: Lente de contato
+                    email:
+                      type: string
+                      example: cliente@email.com
+                    userId:
+                      type: string
+                      format: uuid
+                      example: c73e828c-bacb-492e-b4e6-e5ed68fcbc72
+                    phone:
+                      type: string
+                      example: 5588498764333
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: 2026-02-12T17:55:54.068Z
+                    updatedAt:
+                      type: string
+                      format: date-time
+                      example: 2026-02-12T17:55:54.068Z
+  /customers/{id}:
+    get:
+      summary: Busca de cliente por ID
+      tags:
+        - Customers
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Produto encontrado
+          content:
+            application/json:
+              schema:
+                type: object
+                    id:
+                      type: string
+                      format: uuid
+                      example: 331cccf2-5e3c-42c0-8dc0-f6a0c44bc089
+                    name:
+                      type: string
+                      example: Lente de contato
+                    email:
+                      type: string
+                      example: cliente@email.com
+                    userId:
+                      type: string
+                      format: uuid
+                      example: c73e828c-bacb-492e-b4e6-e5ed68fcbc72
+                    phone:
+                      type: string
+                      example: 5588498764333
+                    createdAt:
+                      type: string
+                      format: date-time
+                      example: 2026-02-12T17:55:54.068Z
+                    updatedAt:
+                      type: string
+                      format: date-time
+                      example: 2026-02-12T17:55:54.068Z
+        "404":
+          description: Produto não encontrado
+
+  
