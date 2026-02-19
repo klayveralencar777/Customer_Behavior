@@ -106,3 +106,13 @@ Essa abordagem garante:
 
 ### EVOLUÇÃO   
 - Melhorias de arquitetura e tipagem estão sendo desenvolvidas. Pretendo migrar a API para TypeScript para verificar erros antes da execução, melhorando a confiabilidade da API e permitindo mais escalabilidade.
+
+
+### FRONT-END
+O front-end deste projeto foi desenvolvido apenas como **cliente de teste da API**, utilizando React + Bootstrap.  
+Ele serve para demonstrar o funcionamento das rotas de backend, mas **não é uma aplicação completa**.  
+
+Funcionalidades implementadas no front-end:
+- Registro de usuários
+- Login de usuários
+- Visualização de métricas (dashboard simples)
