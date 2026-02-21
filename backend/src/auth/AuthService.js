@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { UnauthorizedError } from '../exceptions/Exceptions.js';
-import { UserService } from '../service/UserService.js';
+import { UserService } from '../service/user.service.js';
 
 export class AuthService {
     constructor() { this.userService = new UserService(); }

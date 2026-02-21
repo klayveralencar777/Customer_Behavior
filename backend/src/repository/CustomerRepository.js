@@ -44,7 +44,7 @@ export class CustomerRepository {
     }
 
     async delete(id, userId) {
-        return await prisma.customer.delete({
+        return await prisma.customer.deleteMany({
             where: {
                 id, userId
             }

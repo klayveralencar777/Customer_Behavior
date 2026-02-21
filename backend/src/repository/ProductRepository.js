@@ -32,7 +32,7 @@ export class ProductRepository {
     }
 
     async delete(id, userId) {
-        return await prisma.product.delete({
+        return await prisma.product.deleteMany({
             where: { id, userId }
         });
     }

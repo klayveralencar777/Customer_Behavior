@@ -1,4 +1,4 @@
-import { UserService } from "../service/UserService.js";
+import { UserService } from "../service/user.service.js";
 
 export class UserController {
     constructor() { this.userService = new UserService(); }
