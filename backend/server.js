@@ -1,11 +1,12 @@
 import express from 'express'
-import UserRouter from './src/routes/UserRoutes.js'
+import UserRouter from './src/routes/user.routes.js'
 import AuthRouter from './src/routes/AuthRouter.js'
-import ProductRouter from './src/routes/ProductRoutes.js'
+import ProductRouter from './src/routes/product.routes.js'
 import CustomerRouter from './src/routes/CustomerRoutes.js'
 import TransactionRouter from './src/routes/TransactionRoutes.js'
 import MovementRouter from './src/routes/ProductMovementRoutes.js'
 import MetricsRouter  from './src/routes/MetricsRoutes.js'
+import exceptionHandler from './src/middleware/ExceptionHandler.js'
 import { swaggerUi, swaggerDocument } from "./config/swagger.js";
 import cors from 'cors'
 const app = express()
@@ -25,6 +26,7 @@ app.use('/customers', CustomerRouter);
 app.use('/transactions', TransactionRouter);
 app.use('/movements', MovementRouter);
 app.use('/metrics', MetricsRouter);
+app.use(exceptionHandler);
 app.listen(port, () => {
     console.log(`Server running`)
 })

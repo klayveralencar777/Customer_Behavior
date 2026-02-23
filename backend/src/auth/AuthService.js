@@ -2,15 +2,20 @@ import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { UnauthorizedError } from '../exceptions/Exceptions.js';
 import { UserService } from '../service/user.service.js';
+import { UserRepository } from '../repository/user.repository.js';
 
 export class AuthService {
-    constructor() { this.userService = new UserService(); }
+    constructor() { 
+        this.userService = new UserService();
+        this.userRepository = new UserRepository();
+
+     }
 
     async login({ email, password }) {
         if (!email || !password) {
             throw new UnauthorizedError(`Credenciais inválidas, tente novamente!`); 
         }
-        const user = await this.userService.findUserByEmail(email);
+        const user = await this.userRepository.findByEmailWithPassword(email);
         const checkPassword = await bcrypt.compare(password, user.password);
         
         if (!checkPassword) {

@@ -3,7 +3,7 @@ import { TransactionRepository } from "../repository/TransactionRepository.js";
 import {  CustomerService } from '../service/CustomerService.js'
 import { prisma } from "../database/prisma.js";
 import { BusinessRuleError, EntityNotFound } from "../exceptions/Exceptions.js";
-import { ProductService } from "./ProductService.js";
+import { ProductService } from "./product.service.js";
 
 export class TransactionService {
     constructor() {

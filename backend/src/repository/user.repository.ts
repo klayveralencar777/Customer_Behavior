@@ -1,10 +1,9 @@
-import { includes } from "zod";
 import { prisma } from "../database/prisma.js";
 import { Prisma, User } from "@prisma/client";
 export class UserRepository {
     constructor() {}
 
-   async find(): Promise<Omit<User, "password">> {
+   async find(): Promise<Omit<User, "password">[]> {
         return await prisma.user.findMany({
             select: {
                 id: true,
@@ -46,6 +45,12 @@ export class UserRepository {
         
     }
 
+    async findByEmailWithPassword(email: string) : Promise<User | null>{
+        return await prisma.user.findFirst({ where: { email }});
+    }
+
+    
+
     async create(data: Prisma.UserCreateInput){
         return await prisma.user.create({ data });
     }
@@ -64,9 +69,16 @@ export class UserRepository {
         });
     }
 
-    async remove(id: string) {
+    async remove(id: string): Promise<void>{
         await prisma.user.delete({ where: { id }});
     }
+
+
+
+
+
+
+    
 
 } 
 

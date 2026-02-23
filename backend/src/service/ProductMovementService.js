@@ -1,6 +1,6 @@
 import { prisma } from "../database/prisma.js";
 import { ProductMovementRepository } from "../repository/ProductMovementRepository.js";
-import { ProductService } from '../service/ProductService.js'
+import { ProductService } from './product.service.js'
 
 export class ProductMovementService {
     constructor() { 
