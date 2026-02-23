@@ -1,6 +1,6 @@
 import { ProductMovementRepository } from "../repository/ProductMovementRepository.js";
 import { TransactionRepository } from "../repository/TransactionRepository.js";
-import {  CustomerService } from '../service/CustomerService.js'
+import {  CustomerService } from './customer.service.js'
 import { prisma } from "../database/prisma.js";
 import { BusinessRuleError, EntityNotFound } from "../exceptions/Exceptions.js";
 import { ProductService } from "./product.service.js";

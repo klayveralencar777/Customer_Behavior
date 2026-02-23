@@ -1,5 +1,5 @@
 import express from 'express'
-import { CustomerController } from '../controller/CustomerController.js'
+import { CustomerController } from '../controller/customer.controller.js'
 import { authMiddleware } from '../middleware/AuthMiddleware.js';
 const router = express.Router();
 const customerController = new CustomerController();
